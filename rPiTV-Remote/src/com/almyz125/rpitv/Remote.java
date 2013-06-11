@@ -21,8 +21,10 @@ public class Remote extends Activity {
 		remote.setWebViewClient(new WebViewClient() {
 			public void onReceivedError(WebView view, int errorCode,
 					String description, String failingUrl) {
-				Toast.makeText(activity,description + "\nCheck your IP and Port.",
+				Toast.makeText(activity,
+						description + "\nCheck your IP and Port.",
 						Toast.LENGTH_LONG).show();
+				remote.loadUrl("file:///android_asset/html/error.html");
 			}
 		});
 		load();
