@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">rPiTV Remote</string>
+    <string name="button_confirm">Continue</string>
+    <string name="hint_ip">192.168.0.100</string>
+    <string name="hint_port">8080</string>
+    <string name="label_ip">IP address or DNS name</string>
+    <string name="label_port">Port number</string>
+
+</resources>
