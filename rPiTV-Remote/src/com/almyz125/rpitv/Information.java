@@ -5,6 +5,7 @@ import com.almyz125.rpitv.util.SystemUiHider;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -45,12 +46,14 @@ public class Information extends Activity {
 	/**
 	 * The instance of the {@link SystemUiHider} for this activity.
 	 */
-	
+
 	public static String url, port;
 	public EditText etPort, etUrl;
-	
+
 	private SystemUiHider mSystemUiHider;
 	private Intent openRemoteIntent;
+	private static String prefPort = "prefPort", prefUrl = "prefUrl";
+	private SharedPreferences portData, urlData;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +65,8 @@ public class Information extends Activity {
 		final View contentView = findViewById(R.id.fullscreen_content);
 		etPort = (EditText) findViewById(R.id.et_port);
 		etUrl = (EditText) findViewById(R.id.et_ip);
+		portData = getSharedPreferences(prefPort, 0);
+		urlData = getSharedPreferences(prefUrl, 0);
 
 		// Set up an instance of SystemUiHider to control the system UI for
 		// this activity.
@@ -105,8 +110,18 @@ public class Information extends Activity {
 							// Schedule a hide().
 							delayedHide(AUTO_HIDE_DELAY_MILLIS);
 						}
-						
+
 						mSystemUiHider.show();
+						String urlReturn = urlData.getString("lastUrl",
+								"cloud not load url");
+						if (urlReturn != "cloud not load url") {
+							etUrl.setText(urlReturn);
+						}
+						String portReturn = portData.getString("lastPort",
+								"cloud not load port");
+						if (portReturn != "cloud not load port") {
+							etPort.setText(portReturn);
+						}
 					}
 				});
 
@@ -140,8 +155,17 @@ public class Information extends Activity {
 	}
 
 	private void openRemote() {
+
 		url = etUrl.getText().toString();
+		SharedPreferences.Editor urlEdit = urlData.edit();
+		urlEdit.putString("lastUrl", url);
+		urlEdit.commit();
+
 		port = etPort.getText().toString();
+		SharedPreferences.Editor portEdit = portData.edit();
+		portEdit.putString("lastPort", port);
+		portEdit.commit();
+
 		openRemoteIntent = new Intent(Information.this, Remote.class);
 		Information.this.startActivity(openRemoteIntent);
 	}
