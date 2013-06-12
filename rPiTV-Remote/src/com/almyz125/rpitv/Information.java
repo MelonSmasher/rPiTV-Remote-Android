@@ -82,6 +82,7 @@ public class Information extends Activity {
 					int mControlsHeight;
 					int mShortAnimTime;
 
+					@SuppressWarnings("unused")
 					@Override
 					@TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
 					public void onVisibilityChange(boolean visible) {
