@@ -7,5 +7,6 @@
     <string name="hint_port">8080</string>
     <string name="label_ip">IP address or DNS name</string>
     <string name="label_port">Port number</string>
+    <string name="about_title">About</string>
 
 </resources>

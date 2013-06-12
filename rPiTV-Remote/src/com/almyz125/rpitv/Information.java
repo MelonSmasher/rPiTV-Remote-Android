@@ -9,6 +9,9 @@ import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
@@ -51,7 +54,7 @@ public class Information extends Activity {
 	public EditText etPort, etUrl;
 
 	private SystemUiHider mSystemUiHider;
-	private Intent openRemoteIntent;
+	private Intent openRemoteIntent, openAboutIntent;
 	private static String prefPort = "prefPort", prefUrl = "prefUrl";
 	private SharedPreferences portData, urlData;
 
@@ -201,5 +204,26 @@ public class Information extends Activity {
 	private void delayedHide(int delayMillis) {
 		mHideHandler.removeCallbacks(mHideRunnable);
 		mHideHandler.postDelayed(mHideRunnable, delayMillis);
+	}
+
+	// menu button
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// TODO Auto-generated method stub
+		// return super.onCreateOptionsMenu(menu);
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.main, menu);
+		return true;
+	}
+	
+	public boolean onMenuItemSelected(int featureId, MenuItem item) {
+		// handle on menu item selected here
+		super.onMenuItemSelected(featureId, item);
+		// if item is selected satellite view is toggled
+		if (item.getItemId() == R.id.menu_about) {
+			openAboutIntent = new Intent(Information.this, About.class);
+			Information.this.startActivity(openAboutIntent);
+			return true;
+		}
+		return false;
 	}
 }

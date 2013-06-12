@@ -9,13 +9,13 @@ import android.widget.Toast;
 
 public class Remote extends Activity {
 	private WebView remote;
-	private String url;
-	private String uri;
+	private String url, uri, fileError;
 	final Activity activity = this;
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_remote);
+		fileError = "file:///android_asset/html/error.html";
 		remote = (WebView) this.findViewById(R.id.remoteView);
 		remote.getSettings().setJavaScriptEnabled(true);
 		remote.setWebViewClient(new WebViewClient() {
@@ -24,7 +24,7 @@ public class Remote extends Activity {
 				Toast.makeText(activity,
 						description + "\nCheck your IP and Port.",
 						Toast.LENGTH_LONG).show();
-				remote.loadUrl("file:///android_asset/html/error.html");
+				remote.loadUrl(fileError);
 			}
 		});
 		load();
