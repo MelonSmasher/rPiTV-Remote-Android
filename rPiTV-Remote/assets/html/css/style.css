@@ -390,6 +390,7 @@ min-width: 320px;
 z-index: 99999;
 height: 100%;
 width: 100%;
+color: #ceecdf;
 overflow: scroll;
 }
 .search input{
